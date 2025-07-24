@@ -2,20 +2,8 @@ import pandas as pd
 import plotly.express as px
 from dash import Dash, dcc, html, Input, Output
 import dash_bootstrap_components as dbc
-import zipfile
-import os
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-
-# -------------------- Extract ZIP Files If Needed --------------------
-def extract_zip(zip_path, expected_csv):
-    if not os.path.exists(expected_csv):
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall()
-
-# Extract necessary files
-extract_zip("LA County NO2 Trends 2000-2024.zip", "LA County NO2 Trends 2000-2024.csv")
-extract_zip("LA County Ozone Trends 2000-2021.zip", "LA County Ozone Trends 2000-2021.csv")
 
 # -------------------- Load & Preprocess Pollutant Data --------------------
 def load_pollutant_data(file_path, pollutant_name, county_name):
